@@ -35,18 +35,18 @@ Flags:
                                   requiring an API key, or writing a file.
  
 Usage:
+    # Find all grocery stores in a 5 mile radius
     python grocery_stores_geojson.py --lat <latitude> --lng <longitude> --radius-miles 5 --out stores.geojson
+
+    # Dry run to estimate number of calls before making them since they eventually start costing money
     python grocery_stores_geojson.py --lat <latitude> --lng <longitude> --radius-miles 10 --grid --grid-spacing 5 --dry-run
  
 Notes:
     - Uses the Places API "Nearby Search" endpoint with type=grocery_or_supermarket.
-    - Google caps nearby-search radius at 50,000 meters, so a 5-mile radius is fine.
     - Nearby Search returns at most 60 results (20 per page, up to 3 pages) since
       it's built for "search near a point", not exhaustive coverage of an area.
       If you need every store in a dense area, consider a grid of overlapping
-      searches -- see the --grid option below.
-    - You need a Google Cloud project with the "Places API" enabled and billing
-      set up. Nearby Search calls are billed per request (check current pricing).
+      searches -- see the --grid option above.
 """
 
 import argparse
@@ -58,6 +58,8 @@ from math import cos, radians
 from pathlib import Path
 
 import requests
+
+import geojson
 
 PLACES_NEARBY_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
 MILES_TO_METERS = 1609.344
@@ -150,13 +152,9 @@ def build_geojson(places):
         if lat is None or lng is None:
             continue
 
-        feature = {
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [lng, lat],  # GeoJSON order is [lng, lat]
-            },
-            "properties": {
+        feature = geojson.Feature(
+            geometry=geojson.Point((lng, lat)),
+            properties={
                 "place_id": place_id,
                 "name": place.get("name"),
                 "address": place.get("vicinity"),
@@ -165,10 +163,10 @@ def build_geojson(places):
                 "business_status": place.get("business_status"),
                 "types": place.get("types", []),
             },
-        }
+        )
         features.append(feature)
 
-    return {"type": "FeatureCollection", "features": features}
+    return geojson.FeatureCollection(features)
 
 
 def main():
