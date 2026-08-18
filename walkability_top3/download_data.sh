@@ -45,5 +45,5 @@ mv /tmp/stops.txt ./data/wmata_rail_stops.csv
 # Housing Locations
 curl -o ./data/housing_units.geojson 'https://hub.arcgis.com/api/v3/datasets/4f00b13df5a24cc19068bf356d3d1c45_1/downloads/data?format=geojson&spatialRefId=4326&where=1%3D1'
 ## Housing Data dictionary
-curl -O https://www.fairfaxcounty.gov/demographics/sites/demographics/files/assets/datadictionary/ipls-data-dictionary-gis.pdf
+curl -o ./data/dictionaries/ipls-data-dictionary-gis.pdf https://www.fairfaxcounty.gov/demographics/sites/demographics/files/assets/datadictionary/ipls-data-dictionary-gis.pdf
 
