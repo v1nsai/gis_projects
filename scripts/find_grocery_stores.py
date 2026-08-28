@@ -12,10 +12,8 @@ Requires:
     pip install requests
  
 API key:
-    Create a file named ".env" in the same directory as this script
-    containing a single line:
-        GOOGLE_MAPS_API_KEY=your_api_key_here
-    The script raises an error if no .env file is found next to it.
+    `cp .env.template .env`
+    Make sure GOOGLE_MAPS_API_KEY is filled in with a Google API key with the Places API enabled.
 
 Flags:
     --lat FLOAT                 Center latitude. Required.
@@ -36,10 +34,10 @@ Flags:
  
 Usage:
     # Find all grocery stores in a 5 mile radius
-    python grocery_stores_geojson.py --lat <latitude> --lng <longitude> --radius-miles 5 --out stores.geojson
+    python scripts/find_grocery_stores.py --lat <latitude> --lng <longitude> --radius-miles 5 --out stores.geojson
 
     # Dry run to estimate number of calls before making them since they eventually start costing money
-    python grocery_stores_geojson.py --lat <latitude> --lng <longitude> --radius-miles 10 --grid --grid-spacing 5 --dry-run
+    python scripts/find_grocery_stores.py --lat <latitude> --lng <longitude> --radius-miles 10 --grid --grid-spacing 5 --dry-run
  
 Notes:
     - Uses the Places API "Nearby Search" endpoint with type=grocery_or_supermarket.
@@ -171,7 +169,7 @@ def build_geojson(places):
 
 def main():
     # load .env file
-    env_path = Path(__file__).resolve().parent / ".env"
+    env_path = Path.cwd() / ".env"
     if not env_path.is_file():
         raise FileNotFoundError(f"No .env file found at {env_path}")
 

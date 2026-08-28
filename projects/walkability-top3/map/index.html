@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fairfax County Walkability Hotspots</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="sidebar">
+    <h2>Walkability Hotspots</h2>
+    <p class="subtitle">Fairfax County, VA</p>
+    <p>Areas within 1 mile of at least one grocery store, housing unit, and transit stop.</p>
+
+    <div id="legend">
+      <h3>Legend</h3>
+      <div class="legend-item">
+        <span class="legend-swatch hotspot"></span> Walkability Hotspot
+      </div>
+      <div class="legend-item">
+        <span class="legend-swatch grocery"></span> Grocery Store
+      </div>
+      <div class="legend-item">
+        <span class="legend-swatch housing"></span> Housing Unit
+      </div>
+      <div class="legend-item">
+        <span class="legend-swatch transit-bus"></span> Bus Stop
+      </div>
+      <div class="legend-item">
+        <span class="legend-swatch transit-rail"></span> Train Station
+      </div>
+    </div>
+
+    <div id="layer-controls">
+      <h3>Layers</h3>
+      <label><input type="checkbox" id="toggle-hotspots" checked> Hotspot Polygons</label>
+      <label><input type="checkbox" id="toggle-grocery" checked> Grocery Stores</label>
+      <label><input type="checkbox" id="toggle-housing" checked> Housing Units</label>
+      <label><input type="checkbox" id="toggle-transit" checked> Transit Stops</label>
+    </div>
+
+    <div id="stats"></div>
+  </div>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>

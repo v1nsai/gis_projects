@@ -14,7 +14,7 @@ if [[ ! -n "${GOOGLE_MAPS_API_KEY}" ]]; then
 fi
 
 # Grocery store locations (from Google since FFX county doesn't seem to have a dataset for this)
-python walkability_top3/find_grocery_stores.py \
+python scripts/find_grocery_stores.py \
     --lat 38.882591 \
     --lng -77.171069 \
     --radius-miles 10 \
