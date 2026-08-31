@@ -1,50 +1,64 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# GIS Projects Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Readability First
+Code is written for humans first, machines second. Every file
+MUST be immediately understandable without cross-referencing
+unrelated abstractions. Prefer explicit logic over clever
+shortcuts. Docstrings on all functions; brief comments on
+non-obvious blocks.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Simplicity Over Scale
+This is not production software. No distributed systems,
+caching layers, or premature optimisation. Each sub-project
+MUST be a straightforward script or module that does one job.
+If a pattern does not directly solve the current problem, do
+not add it.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Reproduceability
+Every data pipeline MUST produce deterministic results from
+the same inputs. Pin dependency versions. Document the exact
+steps to regenerate any output. Raw data and transformed
+outputs MUST be storable in the repo.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Cost Awareness
+When using paid third-party APIs (geocoding, satellite
+imagery, etc.), ALWAYS check for free tiers or open
+alternatives first. Log API usage per run. Fail gracefully on
+quota exhaustion rather than retrying blindly. Prefer cached
+results over repeated paid calls.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Per-Project Independence
+Each sub-project under `projects/` MUST be self-contained.
+Shared code goes in `scripts/` only when it is genuinely
+reused by two or more projects. No hidden cross-project
+dependencies.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Tech Stack & Conventions
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- **Languages**: Python (requests, geojson, pipenv), TypeScript (React, Leaflet), Bash
+- **Strict typing** in all Python and TypeScript code; avoid untyped JavaScript
+- **Docstrings** on all functions explaining purpose and parameters
+- **No third-party libraries** without explicit human consent
+- **No automated testing** for now; manual verification is acceptable
+- When in doubt, request human clarification rather than guessing intent
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Project Structure
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+- `projects/` — Individual GIS sub-projects (download, transform, analyse, display)
+- `scripts/` — Shared utilities genuinely reused across sub-projects
+- `data/` — Shared data assets
+- `specs/` — Specifications and documentation
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+This constitution is the single source of truth for project
+conventions. All new sub-projects and modifications MUST
+comply with these principles.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Amendments**: Propose changes via commit message referencing
+the principle being modified. Update the version and date on
+approval.
+
+**Version**: 1.0.0 | **Ratified**: 2026-08-31 | **Last Amended**: 2026-08-31
