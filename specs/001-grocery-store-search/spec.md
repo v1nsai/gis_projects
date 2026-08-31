@@ -1,12 +1,12 @@
 # Feature Specification: Grocery Store Radius Search
 
-**Feature Branch**: `002-grocery-store-search`
+**Feature Branch**: `001-grocery-store-search`
 
 **Created**: 2026-08-31
 
 **Status**: Draft
 
-**Input**: User description: "Write a script that finds all the grocery stores in a given mile radius from a given center point and writes a geojson file with the results."
+**Input**: User description: "Write a script that finds all the grocery stores in a given mile radius from a given center point and writes a geojson file with the results. Use Python and the Google Maps Places API. Use pagination and deduplication if necessary to make sure all grocery stores are found and displayed once and only once."
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -106,10 +106,15 @@ returns results.
   and longitude (decimal degrees) via command-line arguments.
 - **FR-002**: System MUST accept a search radius in miles via
   command-line arguments.
-- **FR-003**: System MUST query a free, open data source for
-  grocery store locations within the specified radius.
-- **FR-004**: System MUST convert the mile radius to the
-  appropriate unit for the data source query.
+- **FR-003**: System MUST query the Google Maps Places API
+  (Nearby Search) for grocery store locations within the
+  specified radius.
+- **FR-004**: System MUST convert the mile radius to metres
+  for the Google Maps API radius parameter.
+- **FR-004a**: System MUST handle API pagination by following
+  `next_page_token` references until all results are retrieved.
+- **FR-004b**: System MUST deduplicate results by `place_id` to
+  ensure each store appears exactly once in the output.
 - **FR-005**: System MUST output results to stdout as a
   human-readable list (store name, address, distance).
 - **FR-006**: System MUST write results to a GeoJSON file when
@@ -152,12 +157,16 @@ returns results.
 ## Assumptions
 
 - The user has a working internet connection for API queries.
-- Free, open data sources (e.g., OpenStreetMap via Overpass
-  API) are sufficient for grocery store data. Paid sources
-  are out of scope unless the user explicitly requests them.
-- The script is a CLI tool, not a web service.
+- The user has a valid Google Maps Platform API key with
+  Places API enabled. The script reads it from the
+  `GOOGLE_MAPS_API_KEY` environment variable.
+- Google Maps Places API is the chosen data source. The user
+  explicitly requested this over free/open alternatives, accepting
+  the associated cost implications.
+- Google Maps Nearby Search returns up to 20 results per page;
+  pagination via `next_page_token` is required for complete
+  coverage in dense areas.
 - "Grocery stores" includes supermarkets, convenience stores
   selling food, and similar retail food outlets — not
-  restaurants or cafes.
+  restaurants or cafes. The `type=grocery_store` filter is used.
 - Output to stdout is the default; file output is opt-in.
-- No authentication is required for the chosen data source.
