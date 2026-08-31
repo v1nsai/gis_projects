@@ -18,6 +18,8 @@ cp .env.template .env
 vim .env
 ```
 ## Project Structure
+Projects should generally follow this structure
+```
 gis_projects/
 ├─ projects/
 │  ├─ project1/
@@ -33,3 +35,4 @@ gis_projects/
 │  ├─ project1/                     # Site files to display results from project1
 │  ├─ project2/                     # Site files to display results from project2 etc.
 ├─ specs/                           # Context files for spec-kit
+```
