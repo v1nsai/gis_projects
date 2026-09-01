@@ -6,29 +6,25 @@
 ## Usage
 
 ```
-python main.py <latitude> <longitude> <radius_miles> [OPTIONS]
+python scripts/find_grocery_stores.py --center "lat,lon" --radius <miles> --output <path.geojson>
 ```
 
-## Positional Arguments
+## Required Arguments
 
-| Argument | Type | Required | Description |
-|----------|------|----------|-------------|
-| latitude | float | yes | Centre point latitude (-90 to 90) |
-| longitude | float | yes | Centre point longitude (-180 to 180) |
-| radius_miles | float | yes | Search radius in miles (> 0) |
+| Flag | Type | Description |
+|------|------|-------------|
+| `--center` | string | Centre point as `"lat,lon"` (decimal degrees) |
+| `--radius` | float | Search radius in miles (> 0) |
+| `--output` | string | Path to write GeoJSON output file |
 
-## Options
+## Configuration
 
-| Flag | Type | Default | Description |
-|------|------|---------|-------------|
-| `--output`, `-o` | string | none | Path to write GeoJSON file |
-| `--place`, `-p` | string | none | Place name to geocode (overrides lat/long) |
+| File | Variable | Required | Description |
+|------|----------|----------|-------------|
+| `.env` | `GOOGLE_MAPS_API_KEY` | yes | Google Maps Platform API key |
 
-## Environment Variables
-
-| Variable | Required | Description |
-|----------|----------|-------------|
-| `GOOGLE_MAPS_API_KEY` | yes | Google Maps Platform API key |
+The script loads `GOOGLE_MAPS_API_KEY` from a `.env` file in
+the project root using `python-dotenv`.
 
 ## Exit Codes
 
@@ -39,35 +35,10 @@ python main.py <latitude> <longitude> <radius_miles> [OPTIONS]
 | 2 | API key missing or invalid |
 | 3 | API request failed (network, quota, etc.) |
 
-## Stdout Format
-
-Human-readable list, one store per line:
-
-```
-Found 47 grocery stores within 5.0 miles of (45.5155, -122.6789):
-
- 1. Trader Joe's (0.3 mi)
-    1234 NW Marshall St, Portland, OR 97209
-
- 2. New Seasons Market (0.7 mi)
-    5320 NE 33rd Ave, Portland, OR 97211
-
- ...
-```
-
-## Stderr Format
-
-Error messages prefixed with `Error:` or `Warning:`:
-
-```
-Error: GOOGLE_MAPS_API_KEY environment variable not set.
-Warning: Large radius (200.0 mi) — results may be slow or incomplete.
-```
-
 ## GeoJSON Output
 
-When `--output` is provided, writes a valid GeoJSON
-FeatureCollection:
+Writes a valid GeoJSON FeatureCollection to the path specified
+by `--output`:
 
 ```json
 {
@@ -93,12 +64,15 @@ FeatureCollection:
 ## Examples
 
 ```bash
-# Search by coordinates
-python main.py 45.5155 -122.6789 5.0
+# Search 5-mile radius around downtown Portland
+python scripts/find_grocery_stores.py \
+  --center "45.5155,-122.6789" \
+  --radius 5.0 \
+  --output stores.geojson
 
-# Search with GeoJSON output
-python main.py 45.5155 -122.6789 5.0 --output stores.geojson
-
-# Search by place name
-python main.py 0 0 1 --place "Downtown Portland, OR"
+# Search 2-mile radius around a point in NYC
+python scripts/find_grocery_stores.py \
+  --center "40.7128,-74.0060" \
+  --radius 2.0 \
+  --output nyc_stores.geojson
 ```

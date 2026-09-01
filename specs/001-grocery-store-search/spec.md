@@ -26,12 +26,14 @@ specified distance.
 
 **Acceptance Scenarios**:
 
-1. **Given** a valid center point (lat, long) and a radius in
-   miles, **When** the user runs the script, **Then** a list of
-   grocery stores within that radius is returned.
+1. **Given** a valid `--center "lat,lon"` and `--radius` and
+   `--output` path, **When** the user runs the script, **Then**
+   a GeoJSON file is written with all grocery stores within
+   that radius.
 2. **Given** a center point where no grocery stores exist
    nearby, **When** the user runs the script, **Then** the
-   output indicates zero results found.
+   output GeoJSON is an empty FeatureCollection and a message
+   indicates zero results found.
 3. **Given** a radius of zero or a negative number, **When**
    the user runs the script, **Then** a clear error message is
    shown and the script exits.
@@ -54,34 +56,11 @@ containing Point features for each store.
 **Acceptance Scenarios**:
 
 1. **Given** a successful search, **When** the script
-   completes, **Then** a valid GeoJSON file is written to disk.
+   completes, **Then** a valid GeoJSON file is written to the
+   specified output path.
 2. **Given** a GeoJSON output, **When** inspected, **Then**
    each feature includes store name, address (if available),
    and coordinates.
-
----
-
-### User Story 3 - Search by Place Name (Priority: P3)
-
-Instead of raw coordinates, the user provides a place name
-(e.g., "Downtown Portland, OR") and the script resolves it to
-a centre point before searching.
-
-**Why this priority**: Convenience — saves the user from
-looking up coordinates manually.
-
-**Independent Test**: Run the script with a place name and
-radius; verify the script resolves the name to coordinates and
-returns results.
-
-**Acceptance Scenarios**:
-
-1. **Given** a recognised place name and a radius, **When**
-   the user runs the script, **Then** the place is geocoded to
-   a centre point and results are returned.
-2. **Given** an unrecognised place name, **When** the user
-   runs the script, **Then** a clear error message is shown
-   indicating the place could not be resolved.
 
 ---
 
@@ -102,36 +81,34 @@ returns results.
 
 ### Functional Requirements
 
-- **FR-001**: System MUST accept a centre point as latitude
-  and longitude (decimal degrees) via command-line arguments.
+- **FR-001**: System MUST accept a centre point via
+  `--center` flag as `"lat,lon"` (decimal degrees, comma-separated).
 - **FR-002**: System MUST accept a search radius in miles via
-  command-line arguments.
-- **FR-003**: System MUST query the Google Maps Places API
+  `--radius` flag.
+- **FR-003**: System MUST accept an output file path via
+  `--output` flag for GeoJSON output.
+- **FR-004**: System MUST query the Google Maps Places API
   (Nearby Search) for grocery store locations within the
   specified radius.
-- **FR-004**: System MUST convert the mile radius to metres
+- **FR-005**: System MUST convert the mile radius to metres
   for the Google Maps API radius parameter.
-- **FR-004a**: System MUST handle API pagination by following
+- **FR-006**: System MUST handle API pagination by following
   `next_page_token` references until all results are retrieved.
-- **FR-004b**: System MUST deduplicate results by `place_id` to
+- **FR-007**: System MUST deduplicate results by `place_id` to
   ensure each store appears exactly once in the output.
-- **FR-005**: System MUST output results to stdout as a
-  human-readable list (store name, address, distance).
-- **FR-006**: System MUST write results to a GeoJSON file when
-  the `--output` flag is provided.
-- **FR-007**: System MUST handle API errors and network
+- **FR-008**: System MUST write results to the specified
+  GeoJSON file path.
+- **FR-009**: System MUST handle API errors and network
   failures gracefully with descriptive messages.
-- **FR-008**: System MUST log the number of API calls made
+- **FR-010**: System MUST log the number of API calls made
   during a run (cost awareness).
-- **FR-009**: System MUST accept an optional `--place` argument
-  to resolve a place name to coordinates before searching.
-- **FR-010**: System MUST include a docstring explaining usage,
+- **FR-011**: System MUST include a docstring explaining usage,
   parameters, and examples.
 
 ### Key Entities
 
 - **Search Request**: Centre point (lat, long), radius (miles),
-  optional place name. Represents the user's query.
+  output file path. Represents the user's query.
 - **Grocery Store**: Name, address (optional), coordinates
   (lat, long), distance from centre. Represents a single result.
 - **Search Result**: Collection of grocery stores matching the
@@ -154,12 +131,28 @@ returns results.
 - **SC-005**: Script can be run end-to-end with a single
   command and no manual configuration.
 
+## Clarifications
+
+### Session 2026-08-31
+
+- Q: Where should the Python dependencies (requests, geojson)
+  for this shared script be managed? → A: Use the root
+  `Pipfile` — this is a shared utility, not project-specific.
+- Q: What CLI arguments should the script accept? → A: Exactly
+  three named flags: `--center "lat,lon"`, `--radius "miles"`,
+  `--output "path/to/file.geojson"`. No positional args, no
+  `--place` geocoding.
+- Q: How should the script load the Google Maps API key? → A:
+  Read from `.env` file in the project root using
+  `python-dotenv`.
+
 ## Assumptions
 
 - The user has a working internet connection for API queries.
 - The user has a valid Google Maps Platform API key with
   Places API enabled. The script reads it from the
-  `GOOGLE_MAPS_API_KEY` environment variable.
+  `GOOGLE_MAPS_API_KEY` variable in a `.env` file at the
+  project root, loaded via `python-dotenv`.
 - Google Maps Places API is the chosen data source. The user
   explicitly requested this over free/open alternatives, accepting
   the associated cost implications.
@@ -169,4 +162,11 @@ returns results.
 - "Grocery stores" includes supermarkets, convenience stores
   selling food, and similar retail food outlets — not
   restaurants or cafes. The `type=grocery_store` filter is used.
-- Output to stdout is the default; file output is opt-in.
+- This is a **shared script** located at
+  `scripts/find_grocery_stores.py`, not a standalone sub-project.
+  It is reused across multiple projects per Principle V of the
+  constitution.
+- Python dependencies (requests, geojson, python-dotenv) are
+  managed by the root `Pipfile`.
+- The `--output` argument is required. Results are always
+  written to a GeoJSON file; no stdout output is produced.

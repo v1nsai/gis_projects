@@ -13,71 +13,68 @@
 ## Setup
 
 ```bash
-cd projects/grocery-store-search
 pipenv install
-export GOOGLE_MAPS_API_KEY="your-api-key-here"
+# Ensure .env file exists in project root with:
+# GOOGLE_MAPS_API_KEY=your-api-key-here
 ```
 
 ## Validation Scenarios
 
-### Scenario 1: Basic search by coordinates
+### Scenario 1: Basic search
 
 ```bash
-python main.py 45.5155 -122.6789 5.0
+python scripts/find_grocery_stores.py \
+  --center "45.5155,-122.6789" \
+  --radius 5.0 \
+  --output test_stores.geojson
 ```
 
-**Expected**: A numbered list of grocery stores within 5
-miles of downtown Portland, OR, printed to stdout. Each entry
-shows name, distance, and address.
+**Expected**: A GeoJSON file `test_stores.geojson` is created
+containing a FeatureCollection with Point features for each
+grocery store within 5 miles of downtown Portland, OR.
 
-### Scenario 2: GeoJSON output
-
-```bash
-python main.py 45.5155 -122.6789 5.0 --output test_stores.geojson
-```
-
-**Expected**: Same stdout output as Scenario 1, plus a file
-`test_stores.geojson` is created. Validate with:
+### Scenario 2: Verify GeoJSON structure
 
 ```bash
 python -c "import json; d=json.load(open('test_stores.geojson')); print(d['type'], len(d['features']), 'features')"
-# Expected: FeatureCollection N features (N > 0)
 ```
 
-### Scenario 3: Search by place name
+**Expected**: `FeatureCollection N features` (N > 0)
+
+### Scenario 3: Empty results
 
 ```bash
-python main.py 0 0 1 --place "Pearl District, Portland, OR"
+python scripts/find_grocery_stores.py \
+  --center "-33.8688,151.2093" \
+  --radius 0.5 \
+  --output empty.geojson
 ```
 
-**Expected**: Script geocodes the place name and returns
-grocery stores near that location.
+**Expected**: GeoJSON file created with empty FeatureCollection
+(or message indicating zero stores found).
 
-### Scenario 4: Empty results
+### Scenario 4: Missing API key
+
+Remove or rename `.env` temporarily, or remove the
+`GOOGLE_MAPS_API_KEY` line from it:
 
 ```bash
-python main.py -33.8688 151.2093 0.5
+python scripts/find_grocery_stores.py \
+  --center "45.5155,-122.6789" \
+  --radius 5.0 \
+  --output test.geojson
 ```
 
-**Expected**: Message indicating zero grocery stores found
-in the specified radius (if testing in a very remote area).
+**Expected**: Error message explaining `GOOGLE_MAPS_API_KEY`
+is not set in `.env`, with exit code 2.
 
-### Scenario 5: Missing API key
-
-```bash
-unset GOOGLE_MAPS_API_KEY
-python main.py 45.5155 -122.6789 5.0
-```
-
-**Expected**: Error message explaining the API key is not
-set, with exit code 2.
-
-### Scenario 6: Deduplication verification
-
-Run a search in a dense area and check for duplicate place_ids:
+### Scenario 5: Deduplication verification
 
 ```bash
-python main.py 40.7128 -74.0060 2.0 --output nyc.geojson
+python scripts/find_grocery_stores.py \
+  --center "40.7128,-74.0060" \
+  --radius 2.0 \
+  --output nyc.geojson
 python -c "
 import json
 d = json.load(open('nyc.geojson'))
@@ -88,3 +85,12 @@ assert len(ids) == len(set(ids)), 'Duplicates found!'
 ```
 
 **Expected**: Total equals Unique — no duplicates.
+
+### Scenario 6: Missing arguments
+
+```bash
+python scripts/find_grocery_stores.py --center "45.5155,-122.6789"
+```
+
+**Expected**: Error message indicating missing required
+arguments (`--radius` and `--output`).

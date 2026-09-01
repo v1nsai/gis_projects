@@ -31,9 +31,12 @@
 
 ## Notes
 
-- FR-003 references "free, open data source" — assumption is
-  OpenStreetMap/Overpass but spec intentionally avoids naming
-  a specific API.
-- Place-name geocoding (User Story 3) depends on a free
-  geocoding service; this is documented as an assumption.
-- All checklist items pass. Spec is ready for `/speckit.plan`.
+- Data source is Google Maps Places API (user-specified).
+- Script is a shared utility at `scripts/find_grocery_stores.py`,
+  not a standalone sub-project. Dependencies managed by root
+  `Pipfile`.
+- CLI accepts exactly three named flags: `--center`, `--radius`,
+  `--output`. No positional args, no `--place` geocoding.
+- API key loaded from `.env` file via `python-dotenv`.
+- All 16/16 checklist items pass. Spec is ready for
+  `/speckit.plan`.
