@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 requests = "*"
 geojson = "*"
+python-dotenv = "*"
 
 [requires]
 python_version = "3.11"

@@ -20,7 +20,7 @@
 
 **Purpose**: Add missing dependency to root Pipfile
 
-- [ ] T001 Add `python-dotenv` to root Pipfile packages in Pipfile
+- [x] T001 Add `python-dotenv` to root Pipfile packages in Pipfile
 
 ---
 
