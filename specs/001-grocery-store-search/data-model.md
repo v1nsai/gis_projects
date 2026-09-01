@@ -21,9 +21,6 @@ Nearby Search endpoint. The script reads these directly.
 | `rating` | float | no | Average rating (0-5) |
 | `opening_hours.open_now` | bool | no | Whether currently open |
 
-**Note**: There is no `distance` field in the API response.
-Distance from centre must be calculated client-side using
-the Haversine formula.
 
 ## Script Input/Output Entities
 
@@ -40,8 +37,8 @@ Parsed from CLI arguments.
 
 ### StoreResult
 
-Internal representation after API call + client-side
-distance calculation. Used to build GeoJSON output.
+Internal representation after API call. Used to build
+GeoJSON output.
 
 | Field | Type | Required | Description |
 |-------|------|----------|-------------|
@@ -50,7 +47,6 @@ distance calculation. Used to build GeoJSON output.
 | address | string | no | From API `vicinity` or `formatted_address` |
 | lat | float | yes | From API `geometry.location.lat` |
 | lon | float | yes | From API `geometry.location.lng` |
-| distance_miles | float | yes | Calculated client-side (Haversine) |
 
 ### GeoJSON Output
 
@@ -69,8 +65,7 @@ The output file follows the GeoJSON FeatureCollection spec.
       "properties": {
         "name": "Store Name",
         "address": "123 Main St",
-        "place_id": "ChIJ...",
-        "distance_miles": 1.2
+        "place_id": "ChIJ..."
       }
     }
   ]
@@ -84,6 +79,5 @@ The output file follows the GeoJSON FeatureCollection spec.
 - `radius_miles` must be greater than 0
 - `place_id` must be non-empty string
 - `name` must be non-empty string
-- `distance_miles` must be non-negative
 - Only `OPERATIONAL` businesses are included in output
   (skip `CLOSED_TEMPORARILY` / `CLOSED_PERMANENTLY`)

@@ -53,8 +53,7 @@ by `--output`:
       "properties": {
         "name": "Trader Joe's",
         "address": "1234 NW Marshall St, Portland, OR 97209",
-        "place_id": "ChIJ...",
-        "distance_miles": 0.3
+        "place_id": "ChIJ..."
       }
     }
   ]

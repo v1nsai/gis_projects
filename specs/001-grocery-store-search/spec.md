@@ -110,7 +110,7 @@ containing Point features for each store.
 - **Search Request**: Centre point (lat, long), radius (miles),
   output file path. Represents the user's query.
 - **Grocery Store**: Name, address (optional), coordinates
-  (lat, long), distance from centre. Represents a single result.
+  (lat, long). Represents a single result.
 - **Search Result**: Collection of grocery stores matching the
   query, plus metadata (total count, API calls made, execution
   time).
