@@ -1,5 +1,5 @@
 # Project Overview
-This is a monorepo containing multiple GIS projects under the `projects/` folder that download, transform and analyze data, then generate a site to display the results
+This is a monorepo containing multiple GIS projects under the `projects/` folder that download, transform and analyze data, then generate a site to display the results.  Pay attention to the current feature spec being worked on, identified in the file `.specify/feature.json`.
 
 # Tech Stack
 - Python

@@ -28,10 +28,10 @@
 
 **Purpose**: CLI skeleton that parses `--center`, `--radius`, `--output` and loads API key from `.env`
 
-- [ ] T002 [US1] Create `scripts/find_grocery_stores.py` with module docstring explaining usage, parameters, and examples per FR-011
-- [ ] T003 [US1] Implement argument parsing for `--center "lat,lon"`, `--radius`, `--output` using `argparse` in `scripts/find_grocery_stores.py` per FR-001, FR-002, FR-003
-- [ ] T004 [US1] Implement `.env` loading via `python-dotenv` and `GOOGLE_MAPS_API_KEY` validation in `scripts/find_grocery_stores.py` — exit code 2 if missing
-- [ ] T005 [US1] Implement input validation in `scripts/find_grocery_stores.py`: parse lat/lon from `--center`, validate ranges (-90/90, -180/180), validate radius > 0 — exit code 1 on failure
+- [x] T002 [US1] Create `scripts/find_grocery_stores.py` with module docstring explaining usage, parameters, and examples per FR-011
+- [x] T003 [US1] Implement argument parsing for `--center "lat,lon"`, `--radius`, `--output` using `argparse` in `scripts/find_grocery_stores.py` per FR-001, FR-002, FR-003
+- [x] T004 [US1] Implement `.env` loading via `python-dotenv` and `GOOGLE_MAPS_API_KEY` validation in `scripts/find_grocery_stores.py` — exit code 2 if missing
+- [x] T005 [US1] Implement input validation in `scripts/find_grocery_stores.py`: parse lat/lon from `--center`, validate ranges (-90/90, -180/180), validate radius > 0 — exit code 1 on failure
 
 ---
 
@@ -39,12 +39,12 @@
 
 **Purpose**: Query the API, handle pagination, deduplicate results
 
-- [ ] T006 [US1] Implement `search_nearby(api_key, lat, lon, radius_miles)` in `scripts/find_grocery_stores.py` — single-page Google Places Nearby Search request with `type=grocery_store`, convert miles to metres, return parsed results per FR-004, FR-005
-- [ ] T007 [US1] Implement pagination loop in `scripts/find_grocery_stores.py` — follow `next_page_token` with 3-second delay until exhausted, collect all results per FR-006
-- [ ] T008 [US1] Implement deduplication by `place_id` using a `set` in `scripts/find_grocery_stores.py` — skip duplicates during collection per FR-007
-- [ ] T009 [US1] Filter out non-`OPERATIONAL` businesses in `scripts/find_grocery_stores.py` — skip `business_status` != `OPERATIONAL`
-- [ ] T010 [US1] Implement API call counter in `scripts/find_grocery_stores.py` — log total calls made at end of run per FR-010
-- [ ] T011 [US1] Implement error handling for API failures in `scripts/find_grocery_stores.py` — HTTP errors, network issues, quota exhaustion — exit code 3 with descriptive message per FR-009
+- [x] T006 [US1] Implement `search_nearby(api_key, lat, lon, radius_miles)` in `scripts/find_grocery_stores.py` — single-page Google Places Nearby Search request with `type=grocery_store`, convert miles to metres, return parsed results per FR-004, FR-005
+- [x] T007 [US1] Implement pagination loop in `scripts/find_grocery_stores.py` — follow `next_page_token` with 3-second delay until exhausted, collect all results per FR-006
+- [x] T008 [US1] Implement deduplication by `place_id` using a `set` in `scripts/find_grocery_stores.py` — skip duplicates during collection per FR-007
+- [x] T009 [US1] Filter out non-`OPERATIONAL` businesses in `scripts/find_grocery_stores.py` — skip `business_status` != `OPERATIONAL`
+- [x] T010 [US1] Implement API call counter in `scripts/find_grocery_stores.py` — log total calls made at end of run per FR-010
+- [x] T011 [US1] Implement error handling for API failures in `scripts/find_grocery_stores.py` — HTTP errors, network issues, quota exhaustion — exit code 3 with descriptive message per FR-009
 
 ---
 
@@ -52,8 +52,8 @@
 
 **Purpose**: Write valid GeoJSON FeatureCollection to the output path
 
-- [ ] T012 [US2] Implement `write_geojson(stores, output_path)` in `scripts/find_grocery_stores.py` — build FeatureCollection with Point features, properties: name, address, place_id per FR-008
-- [ ] T013 [US2] Handle empty results in `scripts/find_grocery_stores.py` — write valid FeatureCollection with empty features array, print message to stderr
+- [x] T012 [US2] Implement `write_geojson(stores, output_path)` in `scripts/find_grocery_stores.py` — build FeatureCollection with Point features, properties: name, address, place_id per FR-008
+- [x] T013 [US2] Handle empty results in `scripts/find_grocery_stores.py` — write valid FeatureCollection with empty features array, print message to stderr
 
 ---
 
@@ -61,9 +61,9 @@
 
 **Purpose**: Wire everything together, handle edge cases from spec
 
-- [ ] T014 [US1] Implement `main()` function in `scripts/find_grocery_stores.py` — parse args → validate → load key → search → paginate → deduplicate → filter → write GeoJSON → log API count
-- [ ] T015 [US1] Add `if __name__ == "__main__": main()` entry point in `scripts/find_grocery_stores.py`
-- [ ] T016 [US1] Add warning for large radius (> 100 miles) in `scripts/find_grocery_stores.py` — results may be slow or incomplete per edge case spec
+- [x] T014 [US1] Implement `main()` function in `scripts/find_grocery_stores.py` — parse args → validate → load key → search → paginate → deduplicate → filter → write GeoJSON → log API count
+- [x] T015 [US1] Add `if __name__ == "__main__": main()` entry point in `scripts/find_grocery_stores.py`
+- [x] T016 [US1] Add warning for large radius (> 100 miles) in `scripts/find_grocery_stores.py` — results may be slow or incomplete per edge case spec
 
 ---
 

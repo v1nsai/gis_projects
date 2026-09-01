@@ -1,0 +1,890 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.011452,
+          40.715588
+        ]
+      },
+      "properties": {
+        "name": "Whole Foods Market",
+        "address": "270 Greenwich Street, New York",
+        "place_id": "ChIJl4BZ5opZwokRUR0n7MrTIEA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.993817,
+          40.741896
+        ]
+      },
+      "properties": {
+        "name": "Trader Joe's",
+        "address": "675 6th Avenue, New York",
+        "place_id": "ChIJI5xCX6NZwokR3jdSQwsw2DI"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.987897,
+          40.733371
+        ]
+      },
+      "properties": {
+        "name": "Trader Joe's",
+        "address": "142 East 14th Street, New York",
+        "place_id": "ChIJa5oiKJ9ZwokR4EX7HlQSstY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.983187,
+          40.768553
+        ]
+      },
+      "properties": {
+        "name": "Whole Foods Market",
+        "address": "10 Columbus Circle, New York",
+        "place_id": "ChIJvaMqIvZYwokR9tb1ok27g8U"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.995291,
+          40.744959
+        ]
+      },
+      "properties": {
+        "name": "Whole Foods Market",
+        "address": "250 7th Avenue, New York",
+        "place_id": "ChIJu9jzyANbwokRIb60wMQSvqQ"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99287,
+          40.689584
+        ]
+      },
+      "properties": {
+        "name": "Trader Joe's",
+        "address": "130 Court Street, Brooklyn",
+        "place_id": "ChIJhS5Yr09awokR44Umk8YfdIY"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98619,
+          40.761738
+        ]
+      },
+      "properties": {
+        "name": "The Food Emporium",
+        "address": "810 8th Avenue, New York",
+        "place_id": "ChIJuWO59FZYwokRDbvnB6y8iBg"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.966333,
+          40.759572
+        ]
+      },
+      "properties": {
+        "name": "Whole Foods Market",
+        "address": "226 East 57th Street, New York",
+        "place_id": "ChIJvYILMORYwokRywGbSMh9b_c"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.981667,
+          40.780765
+        ]
+      },
+      "properties": {
+        "name": "Fairway Market of 74th Street",
+        "address": "2131 Broadway, New York",
+        "place_id": "ChIJQ75KlYlYwokRs7U2ntd8bOU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.977071,
+          40.742464
+        ]
+      },
+      "properties": {
+        "name": "Fairway Market of Kips Bay",
+        "address": "550 2nd Avenue, New York",
+        "place_id": "ChIJVY3s0ghZwokR6e1D8qjJL1k"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.017022,
+          40.674217
+        ]
+      },
+      "properties": {
+        "name": "FOOD BAZAAR",
+        "address": "480-500 Van Brunt Street, Brooklyn",
+        "place_id": "ChIJX8DHbY9awokR6Fph5fQATlU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.99231,
+          40.723825
+        ]
+      },
+      "properties": {
+        "name": "Whole Foods Market",
+        "address": "95 East Houston Street, New York",
+        "place_id": "ChIJQ5yUr4VZwokRbMN-yaOarmc"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.98444,
+          40.765028
+        ]
+      },
+      "properties": {
+        "name": "Westerly Natural Market",
+        "address": "911 8th Avenue, New York",
+        "place_id": "ChIJn9A19FdYwokR_Cu7LVsGZtI"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.991252,
+          40.734693
+        ]
+      },
+      "properties": {
+        "name": "Whole Foods Market",
+        "address": "4 Union Square East, New York",
+        "place_id": "ChIJlZFg95hZwokRzTo2UWdo0Lg"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.951496,
+          40.730952
+        ]
+      },
+      "properties": {
+        "name": "bp",
+        "address": "256 McGuinness Boulevard, Brooklyn",
+        "place_id": "ChIJB5_FfEdZwokRezsu1O9j5ME"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.994374,
+          40.759843
+        ]
+      },
+      "properties": {
+        "name": "The Food Emporium",
+        "address": "452 West 43rd Street, New York",
+        "place_id": "ChIJGWK0cVJYwokRjrjYSgwPdMo"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.985637,
+          40.68869
+        ]
+      },
+      "properties": {
+        "name": "Brooklyn Fare",
+        "address": "200 Schermerhorn Street, Brooklyn",
+        "place_id": "ChIJc8pOHU1awokRwld5I90vIQ4"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.980706,
+          40.752353
+        ]
+      },
+      "properties": {
+        "name": "Sunrise Mart \u65e5\u7cfb\u30b9\u30fc\u30d1\u30fc",
+        "address": "12 East 41st Street, New York",
+        "place_id": "ChIJTya7VwBZwokRlRw-d-i0Orc"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.06412,
+          40.735664
+        ]
+      },
+      "properties": {
+        "name": "Patel Brothers",
+        "address": "780-782 Newark Avenue, Jersey City",
+        "place_id": "ChIJqxsuIzBXwokR_dbxa0XAtys"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.968962,
+          40.753799
+        ]
+      },
+      "properties": {
+        "name": "Morton Williams Supermarkets",
+        "address": "908 2nd Avenue, New York",
+        "place_id": "ChIJwdELkOJYwokRgSJOA1wL2Mo"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.998784,
+          40.727783
+        ]
+      },
+      "properties": {
+        "name": "MORTON WILLIAMS SUPERMARKETS",
+        "address": "130 Bleecker Street, New York",
+        "place_id": "ChIJbcsU2ZFZwokRL9esxzwOzEE"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.002575,
+          40.723261
+        ]
+      },
+      "properties": {
+        "name": "Sunrise Mart \u65e5\u7cfb\u30b9\u30fc\u30d1\u30fc",
+        "address": "494 Broome Street, New York",
+        "place_id": "ChIJiyWSiYtZwokRoefl4pFH9JU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.95275,
+          40.778006
+        ]
+      },
+      "properties": {
+        "name": "Fairway Market of 86th Street",
+        "address": "240 East 86th Street, New York",
+        "place_id": "ChIJQ75KlYlYwokRN76w58GDi00"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.978917,
+          40.764744
+        ]
+      },
+      "properties": {
+        "name": "MORTON WILLIAMS SUPERMARKETS",
+        "address": "140 West 57th Street, New York",
+        "place_id": "ChIJlTWmZvdYwokROyEKYwbPEwo"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.93355,
+          40.714042
+        ]
+      },
+      "properties": {
+        "name": "bp",
+        "address": "1049 Grand Street, Brooklyn",
+        "place_id": "ChIJ88OzhqxewokRYAlzWzbJQZM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.967116,
+          40.793967
+        ]
+      },
+      "properties": {
+        "name": "Whole Foods Market",
+        "address": "808 Columbus Avenue, New York",
+        "place_id": "ChIJ-6ZxFif2wokRaRaETTJc_9Q"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.006336,
+          40.708243
+        ]
+      },
+      "properties": {
+        "name": "Jubilee Marketplace",
+        "address": "99 John Street, New York",
+        "place_id": "ChIJ_2plXD1awokRGHC_fgD3uWE"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.96256,
+          40.700758
+        ]
+      },
+      "properties": {
+        "name": "bp",
+        "address": "677 Kent Avenue, Brooklyn",
+        "place_id": "ChIJSfV9BMNbwokRgN_bJk7b-CU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.956332,
+          40.74555
+        ]
+      },
+      "properties": {
+        "name": "Foodcellar Market",
+        "address": "4-85 47th Road, Long Island City",
+        "place_id": "ChIJF9lZMyJZwokRRMRyCnyUhOM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.977859,
+          40.675263
+        ]
+      },
+      "properties": {
+        "name": "Union Market",
+        "address": "754-756 Union Street, Brooklyn",
+        "place_id": "ChIJmcJlCKpbwokRYS_QqdVx01A"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.973172,
+          40.754509
+        ]
+      },
+      "properties": {
+        "name": "Dainobu",
+        "address": "129 East 47th Street, New York",
+        "place_id": "ChIJCZj-bv1YwokRufvdXr7qn9g"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.984763,
+          40.724003
+        ]
+      },
+      "properties": {
+        "name": "Key Food Urban Marketplace",
+        "address": "52 Avenue A, New York",
+        "place_id": "ChIJA6sY7IJZwokRxp8qLVci8JA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.90716,
+          40.726913
+        ]
+      },
+      "properties": {
+        "name": "bp",
+        "address": "59-36 Maurice Avenue, Maspeth",
+        "place_id": "ChIJpQMXdutewokRUHynfJSeqNM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.987254,
+          40.739413
+        ]
+      },
+      "properties": {
+        "name": "Morton Williams Supermarkets",
+        "address": "278 Park Avenue South, New York",
+        "place_id": "ChIJuxB7FqFZwokRZM2omDcGNb0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.958755,
+          40.77177
+        ]
+      },
+      "properties": {
+        "name": "Citarella Gourmet Market - Upper East Side",
+        "address": "1313 3rd Avenue, New York",
+        "place_id": "ChIJQfNP-r9YwokRO29Ofs2mhYc"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.980401,
+          40.717138
+        ]
+      },
+      "properties": {
+        "name": "Key Food Supermarkets",
+        "address": "43 Columbia Street, New York",
+        "place_id": "ChIJNejms39ZwokRqv5JQZQqPn4"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.999057,
+          40.718657
+        ]
+      },
+      "properties": {
+        "name": "Lily's Vegan Pantry",
+        "address": "213 Hester Street, New York",
+        "place_id": "ChIJZ_zuwolZwokREdp8tfosxII"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.989425,
+          40.763325
+        ]
+      },
+      "properties": {
+        "name": "Amish Market",
+        "address": "731 9th Avenue, New York",
+        "place_id": "ChIJpysMKVFYwokRm1kPPjW3JHk"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.960295,
+          40.766358
+        ]
+      },
+      "properties": {
+        "name": "Grace's Marketplace",
+        "address": "1299 2nd Avenue, New York",
+        "place_id": "ChIJD-XpiupYwokRf4iMusF6h3g"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.034751,
+          40.714781
+        ]
+      },
+      "properties": {
+        "name": "Hudson Greene Market",
+        "address": "77 Hudson Street, Jersey City",
+        "place_id": "ChIJXyL8yKhQwokRXoLtfy0ppY0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.97783,
+          40.77845
+        ]
+      },
+      "properties": {
+        "name": "Pioneer Supermarket",
+        "address": "289 Columbus Avenue, New York",
+        "place_id": "ChIJ8cMB8ItYwokRdFz2-L6gi8Y"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.000232,
+          40.710876
+        ]
+      },
+      "properties": {
+        "name": "SuperFresh Two Bridges",
+        "address": "5 Saint James Place, New York",
+        "place_id": "ChIJnZaSeSRawokR7gAPHfAeJh0"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.025146,
+          40.751787
+        ]
+      },
+      "properties": {
+        "name": "Kings Food Markets",
+        "address": "1212 Shipyard Ln, Hoboken",
+        "place_id": "ChIJ310o3tlZwokRgV_-L1n6O5Q"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.996467,
+          40.756101
+        ]
+      },
+      "properties": {
+        "name": "Brooklyn Fare",
+        "address": "431 West 37th Street, New York",
+        "place_id": "ChIJEVzKxrJZwokR9P9raTunFws"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.944002,
+          40.714126
+        ]
+      },
+      "properties": {
+        "name": "CTown Supermarkets",
+        "address": "330 Graham Avenue, Brooklyn",
+        "place_id": "ChIJV5lo21ZZwokRQ32CKZv4QKU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.976789,
+          40.6731
+        ]
+      },
+      "properties": {
+        "name": "Key Food Urban Marketplace",
+        "address": "130 7th Avenue, Brooklyn",
+        "place_id": "ChIJiRDDLwdbwokRJS0Ur3l4nfw"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.925509,
+          40.702975
+        ]
+      },
+      "properties": {
+        "name": "City Fresh Market - Bushwick",
+        "address": "229 Knickerbocker Avenue #2401, Brooklyn",
+        "place_id": "ChIJR3vZXANcwokRc0ytxmaTrQA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.938007,
+          40.75902
+        ]
+      },
+      "properties": {
+        "name": "bp",
+        "address": "36-42 21st Street, Long Island City",
+        "place_id": "ChIJ60q4Zc1YwokRlQwmO3T--BQ"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.995221,
+          40.730874
+        ]
+      },
+      "properties": {
+        "name": "Space Market",
+        "address": "1 University Place #1, New York",
+        "place_id": "ChIJ90vZnpBZwokRIU-yi8A_y18"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.919815,
+          40.714194
+        ]
+      },
+      "properties": {
+        "name": "Western Beef Supermarket",
+        "address": "47-05 Metropolitan Avenue, Ridgewood",
+        "place_id": "ChIJ8ypajKRewokRv4t0WcP_Pqg"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.928225,
+          40.756067
+        ]
+      },
+      "properties": {
+        "name": "Rio Market Inc",
+        "address": "32-15 36th Avenue, Astoria",
+        "place_id": "ChIJk_srPy5fwokRc4JZPOT0EDM"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.996937,
+          40.717192
+        ]
+      },
+      "properties": {
+        "name": "Po Wing Hong Food Market",
+        "address": "49 Elizabeth Street, New York",
+        "place_id": "ChIJCZNHjydawokR1j5-JU5b12Q"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.976329,
+          40.762933
+        ]
+      },
+      "properties": {
+        "name": "Dainobu",
+        "address": "36 West 56th Street, New York",
+        "place_id": "ChIJfbF0F_pYwokR3zDqQmYpeZU"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.962869,
+          40.717418
+        ]
+      },
+      "properties": {
+        "name": "D\u00e9panneur",
+        "address": "242 Wythe Avenue, Brooklyn",
+        "place_id": "ChIJ2V33K2FZwokRvIENcCDUwQc"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.974501,
+          40.791367
+        ]
+      },
+      "properties": {
+        "name": "Barzini's",
+        "address": "2451 Broadway, New York",
+        "place_id": "ChIJja1RVoJYwokR1pkbQ_Z7cH4"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.994249,
+          40.7136
+        ]
+      },
+      "properties": {
+        "name": "New York Marts",
+        "address": "75 East Broadway, New York",
+        "place_id": "ChIJay5TvShawokRN57j6xon6ho"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -74.030606,
+          40.739036
+        ]
+      },
+      "properties": {
+        "name": "Organic Basic Food",
+        "address": "204 Washington Street, Hoboken",
+        "place_id": "ChIJyYwGcF9XwokRP4HKP4qGGvA"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.912603,
+          40.762944
+        ]
+      },
+      "properties": {
+        "name": "Key Food Supermarket",
+        "address": "42-15 30th Avenue, Astoria",
+        "place_id": "ChIJAdVZ1j9fwokRxBpQVv9SQaE"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          -73.977744,
+          40.763203
+        ]
+      },
+      "properties": {
+        "name": "Ernest Klein & Co's Gourmet Food",
+        "address": "1366 6th Avenue, New York",
+        "place_id": "ChIJXx687flYwokR2WalPJD48Zs"
+      }
+    }
+  ]
+}

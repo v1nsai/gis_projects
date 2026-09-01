@@ -21,6 +21,7 @@ Environment:
 
 import argparse
 import json
+import math
 import os
 import sys
 import time
@@ -36,6 +37,8 @@ load_dotenv(os.path.join(PROJECT_ROOT, ".env"))
 GOOGLE_PLACES_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
 MILES_TO_METRES = 1609.344
 PAGE_DELAY_SECONDS = 3
+SUBREGION_RADIUS_MILES = 5.0
+MAX_RESULTS_PER_QUERY = 60
 
 
 def parse_args() -> argparse.Namespace:
@@ -121,16 +124,71 @@ def load_api_key() -> str:
     return api_key
 
 
+def get_subregions(lat: float, lon: float, radius_miles: float) -> list[tuple[float, float, float]]:
+    """Generate sub-regions using hexagonal packing for a circular area.
+
+    For radius <= SUBREGION_RADIUS_MILES, returns a single sub-region.
+    For larger radii, generates a hexagonal grid of overlapping sub-regions
+    to ensure full coverage without holes.
+
+    Args:
+        lat: Centre latitude.
+        lon: Centre longitude.
+        radius_miles: Search radius in miles.
+
+    Returns:
+        List of (lat, lon, radius_miles) tuples for each sub-region.
+    """
+    if radius_miles <= SUBREGION_RADIUS_MILES:
+        return [(lat, lon, radius_miles)]
+
+    # Convert miles to approximate degree offsets
+    # 1 degree latitude ≈ 69 miles
+    # 1 degree longitude ≈ 69 miles * cos(latitude)
+    miles_per_deg_lat = 69.0
+    miles_per_deg_lon = 69.0 * math.cos(math.radians(lat))
+
+    # Spacing between sub-region centers (80% of sub-region radius for overlap)
+    spacing_miles = SUBREGION_RADIUS_MILES * 0.8
+    spacing_lat = spacing_miles / miles_per_deg_lat
+    spacing_lon = spacing_miles / miles_per_deg_lon
+
+    # Number of rings needed (center + rings around it)
+    num_rings = math.ceil(radius_miles / SUBREGION_RADIUS_MILES) - 1
+
+    subregions: list[tuple[float, float, float]] = []
+
+    # Ring 0: center
+    subregions.append((lat, lon, SUBREGION_RADIUS_MILES))
+
+    # Rings 1..num_rings
+    for ring in range(1, num_rings + 1):
+        ring_distance_lat = ring * spacing_lat
+        # 6 circles per ring, evenly spaced at 60° intervals
+        for i in range(6):
+            angle_rad = math.radians(60 * i)
+            offset_lat = ring_distance_lat * math.cos(angle_rad)
+            offset_lon = ring_distance_lat * math.sin(angle_rad) / math.cos(math.radians(lat))
+            subregions.append((lat + offset_lat, lon + offset_lon, SUBREGION_RADIUS_MILES))
+
+    return subregions
+
+
 def search_nearby(
-    api_key: str, lat: float, lon: float, radius_miles: float
+    api_key: str, lat: float, lon: float, radius_miles: float,
+    page_token: str | None = None,
 ) -> dict:
-    """Send a single Nearby Search request to Google Places API.
+    """Send a Nearby Search request to Google Places API.
+
+    On the first call, sends a location+radius search. On subsequent calls
+    with a page_token, only pagetoken and key are sent per Google's spec.
 
     Args:
         api_key: Google Maps API key.
         lat: Centre latitude.
         lon: Centre longitude.
         radius_miles: Search radius in miles.
+        page_token: Optional token for fetching the next page of results.
 
     Returns:
         Parsed JSON response dict.
@@ -138,13 +196,21 @@ def search_nearby(
     Raises:
         SystemExit: On HTTP or API errors.
     """
-    radius_metres = radius_miles * MILES_TO_METRES
-    params = {
-        "location": f"{lat},{lon}",
-        "radius": radius_metres,
-        "type": "grocery_store",
-        "key": api_key,
-    }
+    if page_token:
+        print('Fetching next page...')
+        params = {
+            "pagetoken": page_token,
+            "key": api_key,
+        }
+    else:
+        print('Searching nearby...')
+        radius_metres = radius_miles * MILES_TO_METRES
+        params = {
+            "location": f"{lat},{lon}",
+            "radius": radius_metres,
+            "type": "supermarket",
+            "key": api_key,
+        }
 
     try:
         resp = requests.get(GOOGLE_PLACES_URL, params=params, timeout=30)
@@ -185,37 +251,43 @@ def search_nearby(
     return data
 
 
-def collect_all_stores(
+def query_single_region(
     api_key: str, lat: float, lon: float, radius_miles: float
-) -> list[dict]:
-    """Collect all stores across paginated API results.
+) -> tuple[list[dict], int]:
+    """Query a single region with pagination until results are exhausted.
 
-    Follows next_page_token until exhausted. Deduplicates by place_id.
-    Filters out non-OPERATIONAL businesses.
+    Args:
+        api_key: Google Maps API key.
+        lat: Centre latitude.
+        lon: Centre longitude.
+        radius_miles: Search radius in miles.
 
     Returns:
-        List of store dicts with keys: place_id, name, address, lat, lon.
+        Tuple of (list of store dicts, number of API calls made).
     """
-    seen_ids: set[str] = set()
     stores: list[dict] = []
+    seen_ids: set[str] = set()
     api_calls = 0
-    next_page_token = None
+    page_token: str | None = None
 
     while True:
         api_calls += 1
-        data = search_nearby(api_key, lat, lon, radius_miles)
+        data = search_nearby(api_key, lat, lon, radius_miles, page_token)
 
-        for place in data.get("results", []):
+        results = data.get("results", [])
+        if not results:
+            break
+
+        new_count = 0
+        for place in results:
             place_id = place.get("place_id", "")
             if not place_id:
                 continue
 
-            # Skip duplicates
             if place_id in seen_ids:
                 continue
             seen_ids.add(place_id)
 
-            # Skip non-operational businesses
             if place.get("business_status") != "OPERATIONAL":
                 continue
 
@@ -228,16 +300,70 @@ def collect_all_stores(
                 "lon": location.get("lng", 0),
             }
             stores.append(store)
+            new_count += 1
 
-        next_page_token = data.get("next_page_token")
-        if not next_page_token:
+        if new_count == 0:
             break
 
-        # Google requires a delay before using next_page_token
+        page_token = data.get("next_page_token")
+        if not page_token:
+            break
+
         time.sleep(PAGE_DELAY_SECONDS)
 
-    print(f"API calls made: {api_calls}", file=sys.stderr)
-    return stores
+    return stores, api_calls
+
+
+def collect_all_stores(
+    api_key: str, lat: float, lon: float, radius_miles: float
+) -> list[dict]:
+    """Collect all stores using adaptive splitting to bypass the 60-result cap.
+
+    First queries the full area. If the API returns 60 results (hitting the cap),
+    splits into overlapping 5-mile sub-regions using hexagonal packing and
+    queries each. Merges and deduplicates all results by place_id.
+
+    Args:
+        api_key: Google Maps API key.
+        lat: Centre latitude.
+        lon: Centre longitude.
+        radius_miles: Search radius in miles.
+
+    Returns:
+        List of store dicts with keys: place_id, name, address, lat, lon.
+    """
+    print('Finding grocery stores...')
+    total_api_calls = 0
+
+    # Step 1: Query the full area
+    initial_stores, initial_calls = query_single_region(api_key, lat, lon, radius_miles)
+    total_api_calls += initial_calls
+
+    # If we got fewer than 60 results, we're done (no cap hit)
+    if len(initial_stores) < MAX_RESULTS_PER_QUERY:
+        print(f"API calls made: {total_api_calls}", file=sys.stderr)
+        return initial_stores
+
+    # Step 2: Cap was hit — split into sub-regions
+    print(f"Hit {MAX_RESULTS_PER_QUERY}-result cap, splitting into sub-regions...")
+    subregions = get_subregions(lat, lon, radius_miles)
+    print(f"Generated {len(subregions)} sub-regions ({SUBREGION_RADIUS_MILES}-mi radius each)")
+
+    all_stores: list[dict] = []
+    seen_ids: set[str] = set()
+
+    for i, (sub_lat, sub_lon, sub_radius) in enumerate(subregions, 1):
+        print(f"  Sub-region {i}/{len(subregions)} ({sub_lat:.4f}, {sub_lon:.4f})...")
+        stores, calls = query_single_region(api_key, sub_lat, sub_lon, sub_radius)
+        total_api_calls += calls
+
+        for store in stores:
+            if store["place_id"] not in seen_ids:
+                seen_ids.add(store["place_id"])
+                all_stores.append(store)
+
+    print(f"Total API calls made: {total_api_calls}", file=sys.stderr)
+    return all_stores
 
 
 def write_geojson(stores: list[dict], output_path: str) -> None:
@@ -247,6 +373,8 @@ def write_geojson(stores: list[dict], output_path: str) -> None:
         stores: List of store dicts with place_id, name, address, lat, lon.
         output_path: Path to write the GeoJSON file.
     """
+    print(f'Found {len(stores)} grocery stores')
+    print('Writing geojson...')
     features = []
     for store in stores:
         feature = Feature(
